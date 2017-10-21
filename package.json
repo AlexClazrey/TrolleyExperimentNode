@@ -1,0 +1,16 @@
+{
+  "name": "trolley-experiment-node",
+  "version": "1.0.0",
+  "description": "Part of auto trolley project, communicate between servo experiment arduino and web server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/AlexClazrey/TrolleyExperimentNode.git",
+  "author": "alex claz",
+  "license": "ISC",
+  "dependencies": {
+    "serialport": "^6.0.0",
+    "socket.io-client": "^2.0.3"
+  }
+}
