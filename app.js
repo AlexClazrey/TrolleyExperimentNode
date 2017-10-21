@@ -31,7 +31,7 @@ const connect = function(domain, index) {
   const sock = io('http://' + domain + '/experiment');
   sock.on('error', function() {
     // retry connect
-    if(!sock.socket.connected) {
+    if(!sock.connected) {
       connectFailed(domain, index);
     }
   });
@@ -66,10 +66,11 @@ const socketEmit = function(event, data) {
 let writeCount = 0;
 const port = new serialPort(serialPortAddress, {
   baudRate: 9600,
-  parser: serialPort.parsers.readline('\n')
 });
+const parser = new serialPort.parsers.Readline;
+port.pipe(parser);
 port.on('open', function() {
-  console.log('[OK] serial port opened:', port.isOpen());
+  console.log('[OK] serial port opened:', port.isOpen);
 });
 const portWrite = function(str) {
   port.write(str, function(err) {
@@ -80,7 +81,7 @@ const portWrite = function(str) {
   })
 };
 
-port.on('data', function(data) {
+parser.on('data', function(data) {
   // data schema 'angle <phi> <theta>'
   if(data.indexOf('angle ') === 0) {
     const args = data.split(' ');
